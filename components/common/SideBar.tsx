@@ -1,9 +1,31 @@
 "use client";
 
-import { ChevronRight, Home } from "lucide-react";
-import { useState } from "react";
+import { ChevronRight, Home, Link } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { JSX, useState } from "react";
+
+interface SideBarItem {
+  name: string;
+  icon: JSX.Element;
+  link: string;
+}
+
+const SideBarItems: SideBarItem[] = [
+  {
+    name: "/",
+    icon: <Home />,
+    link: "#",
+  },
+  {
+    name: "/profile",
+    icon: <Home />,
+    link: "#",
+  },
+];
 
 const SideBar = () => {
+  const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   return (
@@ -23,14 +45,20 @@ const SideBar = () => {
       </div>
       <nav>
         <ul>
-          <li className="flex flex-row gap-2 items-center border rounded-lg text-center align-middle border-white pb-2 transition-all duration-300 ease-in-out hover:bg-gray-700">
-            <Home className="w-16 h-16" />
-            {isOpen || isHovered ? (
-              <a href="#" className="">
-                Home
-              </a>
-            ) : null}
-          </li>
+          {SideBarItems &&
+            SideBarItems.map((item, index) => (
+              <Link
+                key={`${index}+${item.name}`}
+                className={`"flex flex-row gap-2 items-center  rounded-lg text-center align-middle  pb-2 transition-transform duration-1000 ease-linear hover:bg-gray-700" ${pathname === item.link ? "bg-gray-700" : ""}`}
+              >
+                {item.icon}
+                {isOpen || isHovered ? (
+                  <a href={item.link} className="">
+                    {`${item.name}`}
+                  </a>
+                ) : null}
+              </Link>
+            ))}
         </ul>
       </nav>
     </aside>
