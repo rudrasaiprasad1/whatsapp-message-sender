@@ -9,11 +9,13 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <div className="flex h-screen w-screen">
+      <div className="flex h-screen w-screen overflow-hidden">
         <SideBar />
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full ">
           <NavBar />
-          {children}
+          <div className="overflow-y-scroll flex-1 bg-[--color-whatsapp-bg] p-6">
+            {children}
+          </div>
         </div>
       </div>
     </div>

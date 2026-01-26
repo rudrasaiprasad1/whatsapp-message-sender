@@ -1,5 +1,5 @@
 {
-  "name": "whatsapp-message-sender",
+  "name": "Form2WhatsApp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,8 @@
     "lucide-react": "^0.562.0",
     "next": "16.1.3",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "recharts": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

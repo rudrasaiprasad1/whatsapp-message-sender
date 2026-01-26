@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --wa-scrollbar-track: #e9f7ef;   /* light WhatsApp green */
+  --wa-scrollbar-thumb: #9be7bd;   /* soft green */
+  --wa-scrollbar-hover: #25d366;   /* WhatsApp green */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===============================
+   Light Theme (Default)
+   =============================== */
+@theme {
+  --color-whatsapp-green: #25D366;
+  --color-whatsapp-dark: #075E54;
+  --color-whatsapp-light: #DCF8C6;
+  --color-whatsapp-bg: #f7f9fb;
+  --color-whatsapp-hover: #0b6b61;
+
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
+
+  --font-whatsapp: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  --radius-whatsapp: 1rem;
+  --shadow-whatsapp: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===============================
+   Dark Mode Theme
+   Apply by adding `.dark` class
+   =============================== */
+.dark {
+  --color-whatsapp-green: #25D366;
+  --color-whatsapp-dark: #0b3f37;
+  --color-whatsapp-light: #1f3b2f;
+  --color-whatsapp-bg: #0f172a;
+  --color-whatsapp-hover: #1faa6d;
+
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-border: #1f2937;
+
+  --shadow-whatsapp: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* ===============================
+   Base styles
+   =============================== */
+@layer base {
+  body {
+    font-family: var(--font-whatsapp);
+    background-color: var(--color-whatsapp-bg);
+    color: var(--color-text-primary);
+  }
+
+  section {
+    background-color: var(--color-whatsapp-bg);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===============================
+   Utility helpers (optional but clean)
+   =============================== */
+@layer utilities {
+  .bg-whatsapp {
+    background-color: var(--color-whatsapp-bg);
+  }
+
+  .bg-whatsapp-dark {
+    background-color: var(--color-whatsapp-dark);
+  }
+
+  .text-whatsapp {
+    color: var(--color-whatsapp-green);
+  }
+
+  .border-whatsapp {
+    border-color: var(--color-border);
+  }
+
+  .btn-whatsapp {
+    background-color: var(--color-whatsapp-green);
+    color: white;
+    border-radius: var(--radius-whatsapp);
+    box-shadow: var(--shadow-whatsapp);
+  }
+
+  .btn-whatsapp:hover {
+    background-color: var(--color-whatsapp-hover);
+  }
+
+  .card-whatsapp {
+    background-color: white;
+    border-radius: var(--radius-whatsapp);
+    box-shadow: var(--shadow-whatsapp);
+  }
+
+  .dark .card-whatsapp {
+    background-color: #020617;
+  }
+}
+
+.input {
+  @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-800 
+         placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:border-transparent;
+}
+
+
+/* Width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--wa-scrollbar-track);
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background-color: var(--wa-scrollbar-thumb);
+  border-radius: 10px;
+  border: 2px solid var(--wa-scrollbar-track);
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--wa-scrollbar-hover);
 }

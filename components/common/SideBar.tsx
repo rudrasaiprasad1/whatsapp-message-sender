@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronRight, Home, Link } from "lucide-react";
+import { ChevronRight, Home, User, Settings } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { JSX, useState } from "react";
 
@@ -10,72 +11,86 @@ interface SideBarItem {
   link: string;
 }
 
+const dummyUserId = "user_12345";
+
 const SideBarItems: SideBarItem[] = [
   {
-    name: "home",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
+    name: "Home",
+    icon: <Home className="w-6 h-6" />,
+    link: "/dashboard",
   },
   {
-    name: "profile",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
+    name: "Profile",
+    icon: <User className="w-6 h-6" />,
+    link: `/profile/${dummyUserId}`,
   },
   {
-    name: "profile",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
-  },
-  {
-    name: "profile",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
-  },
-  {
-    name: "profile",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
-  },
-  {
-    name: "profile",
-    icon: <Home className="text-black dark:text-white w-12 h-12" />,
-    link: "#",
+    name: "Settings",
+    icon: <Settings className="w-6 h-6" />,
+    link: "/settings",
   },
 ];
 
 const SideBar = () => {
   const pathname = usePathname();
-
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const expanded = isOpen || isHovered;
+
+   
+
+
   return (
     <aside
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={` ${isOpen || isHovered ? "w-64" : "w-16"}  dark:bg-black text-white h-full p-4 transition-width duration-300 ease-in-out border-2 border-gray-400 dark:border-white  rounded-lg`}
+      className={`${
+        expanded ? "w-64" : "w-16"
+      } bg-[#075E54] text-white h-screen p-4 transition-all duration-300 ease-in-out border-r border-green-700`}
     >
-      <h2 className="text-2xl font-bold mb-4">SideBar</h2>
-      <div className="relative w-full">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
+        {expanded && (
+          <h2 className="text-lg font-semibold tracking-wide">Form2WhatsApp</h2>
+        )}
+
         <button
-          className="absolute -right-7 border-2 text-black border-black dark:border-white rounded-lg"
           onClick={() => setIsOpen(!isOpen)}
+          className="p-1 rounded-lg bg-[#25D366] hover:bg-green-400"
         >
-          <ChevronRight className={`${isOpen ? "rotate-180" : ""}`} />
+          <ChevronRight
+            className={`w-5 h-5 transition-transform duration-300 ease-in-out ${
+              isOpen || isHovered ? "rotate-180" : ""
+            }`}
+          />
         </button>
       </div>
-      <nav className="flex flex-col gap-4">
-        {SideBarItems &&
-          SideBarItems.map((item, index) => (
+
+      {/* Navigation */}
+      <nav className="flex flex-col gap-2">
+        {SideBarItems.map((item) => {
+          const isActive = pathname === item.link;
+
+          return (
             <Link
-              key={`${index}+${item.name}`}
-              className={`flex flex-row gap-2 w-full justify-between rounded-lg transition-transform duration-1000 ease-linear hover:bg-gray-200 border-2 border-gray-500 text-black dark:text-white ${pathname === item.link ? " dark:bg-gray-700" : ""} `}
+              key={item.name}
+              href={item.link}
+              className={`flex items-center gap-4 px-1 py-1 rounded-xl transition-all
+                ${
+                  isActive
+                    ? "bg-[#25D366] text-white"
+                    : "text-gray-200 hover:bg-[#0b6b61]"
+                }
+              `}
             >
-              {item.icon ? item.icon : null}
-              {item.name || isOpen || isHovered ? (
-                <a href={item.link}>{`${item.name}`}</a>
-              ) : null}
+              {item.icon}
+              {expanded && (
+                <span className="text-sm font-medium">{item.name}</span>
+              )}
             </Link>
-          ))}
+          );
+        })}
       </nav>
     </aside>
   );
