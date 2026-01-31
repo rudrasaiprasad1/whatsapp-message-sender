@@ -17,9 +17,9 @@ import {
 // }
 
 export default function ProfilePage(
-    // { params }: ProfilePageProps
+  // { params }: ProfilePageProps
 ) {
-//   const { userId } = params;
+  //   const { userId } = params;
 
   // 👉 later replace this with API call using userId
   const user = {
@@ -107,9 +107,8 @@ export default function ProfilePage(
         <div className="card-whatsapp p-6">
           <h3 className="font-semibold mb-4">WhatsApp API Status</h3>
           <p
-            className={`font-medium ${
-              user.apiTrial ? "text-yellow-600" : "text-green-600"
-            }`}
+            className={`font-medium ${user.apiTrial ? "text-yellow-600" : "text-green-600"
+              }`}
           >
             {user.apiTrial ? "Free Trial Active" : "Paid & Active"}
           </p>

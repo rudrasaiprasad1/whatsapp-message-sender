@@ -1,16 +1,23 @@
 "use client";
+import BottomNavigationBar from "@/components/common/BottomNavigationBar";
 import { PricingPlans } from "@/components/PricingCards";
+import { Menu, Navigation2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function HomePage() {
-  
+
   const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const redirectToDashboardPage = () => {
     router.push("/dashboard")
   }
+
+
   return (
-    <div className="min-h-screen bg-[#f7f9fb] text-gray-800 font-sans">
+    <div className="min-h-screen bg-whatsapp-bg text-gray-800 font-sans">
       {/* Header */}
       <header className="bg-[#075E54] px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3 text-white font-semibold text-lg">
@@ -30,7 +37,8 @@ export default function HomePage() {
           </svg>
           <span>Form2WhatsApp</span>
         </div>
-        <nav className="space-x-6">
+        {/* desktop  */}
+        <nav className="space-x-6 md:block hidden">
           <a href="#features" className="text-gray-200 hover:text-white">
             Features
           </a>
@@ -100,13 +108,16 @@ export default function HomePage() {
         </div>
       </section>
 
-
       {/* Footer */}
       <footer className="bg-[#075E54] text-gray-200 text-center py-6">
         <p className="text-sm">
           © {new Date().getFullYear()} Form2WhatsApp. All rights reserved.
         </p>
       </footer>
+
+      {/* BottomNavigationBar */}
+      <BottomNavigationBar />
+
     </div>
   );
 }

@@ -46,7 +46,7 @@ export const PricingPlans = () => {
   return (
     <section
       id="pricing"
-      className="bg-[#f7f9fb] py-20"
+      className="bg-[#f7f9fb] py-20 "
     >
       <div className="max-w-6xl mx-auto px-8">
         {/* Heading */}
@@ -66,10 +66,9 @@ export const PricingPlans = () => {
             <div
               key={plan.name}
               className={`rounded-2xl border p-8 flex flex-col transition-all
-                ${
-                  plan.highlighted
-                    ? "border-[#25D366] shadow-xl scale-105 bg-white"
-                    : "border-gray-200 bg-white hover:shadow-lg"
+                ${plan.highlighted
+                  ? "border-[#25D366] shadow-xl scale-105 bg-white"
+                  : "border-gray-200 bg-white hover:shadow-lg"
                 }
               `}
             >
@@ -100,10 +99,9 @@ export const PricingPlans = () => {
               {/* CTA */}
               <button
                 className={`mt-8 py-3 rounded-xl font-medium transition
-                  ${
-                    plan.highlighted
-                      ? "bg-[#25D366] text-white hover:bg-green-500"
-                      : "border border-[#25D366] text-[#25D366] hover:bg-green-50"
+                  ${plan.highlighted
+                    ? "bg-[#25D366] text-white hover:bg-green-500"
+                    : "border border-[#25D366] text-[#25D366] hover:bg-green-50"
                   }
                 `}
               >
